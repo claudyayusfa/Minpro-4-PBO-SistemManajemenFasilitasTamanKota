@@ -1,6 +1,6 @@
 # 🌳 Sistem Manajemen Fasilitas Taman Kota 𖦹˙🍎.°🌱٭.
 
-**Mini Project 4 — Praktikum Pemrograman Berorientasi Objek**
+**Mini Project 4 Praktikum Pemrograman Berorientasi Objek**
 
 Sistem Manajemen Fasilitas Taman Kota adalah sistem berbasis **Java Command Line Interface (CLI)** yang digunakan untuk mengelola data fasilitas taman kota. Program ini dikembangkan menggunakan konsep **Object-Oriented Programming (OOP)**, arsitektur **Model-View-Controller (MVC)**, dan integrasi database **MySQL** melalui **JDBC, PreparedStatement, dan DAO Pattern**.
 
@@ -99,6 +99,8 @@ Program terlebih dahulu memeriksa apakah fasilitas tersedia di database.
 
 <img width="992" height="332" alt="image" src="https://github.com/user-attachments/assets/87f9e857-e413-4716-90c2-0d8143bce1c8" />
 
+---
+
 ## 🔐 4. Penerapan Encapsulation
 
 **Encapsulation** adalah konsep OOP yang digunakan untuk melindungi atribut agar tidak dapat diakses atau diubah secara langsung dari luar class.
@@ -116,6 +118,8 @@ Pada program ini, encapsulation diterapkan dalam abstract class `Fasilitas` mela
 Method `setJumlah()` memastikan jumlah fasilitas tidak bernilai negatif. Validasi juga diterapkan pada ID, nama, kondisi, dan atribut khusus fasilitas.
 
 Pada proses Create dan Update, Controller menggunakan validasi Model sebelum data dikirim ke database.
+
+---
 
 ## 🧬 5. Penerapan Inheritance
 
@@ -143,8 +147,176 @@ Setiap subclass memiliki atribut khusus:
 
 Dengan inheritance, atribut dan method yang sama tidak perlu ditulis ulang pada setiap subclass.
 
+---
+
 ## 🔀 6. Penerapan Polymorphism
 
 **Polymorphism** adalah konsep OOP yang dapat membuat method dengan nama yang sama memiliki perilaku berbeda.
 
 Program menerapkan **method overriding** dan **method overloading**.
+
+### 6.1 Method Overriding
+
+Overriding diterapkan ketika subclass memberikan implementasi khusus terhadap method yang diwarisi dari superclass.
+
+Contohnya adalah method `tampilkanInfo()` pada `FasilitasUmum` dan `FasilitasOlahraga`.
+
+<img width="968" height="278" alt="image" src="https://github.com/user-attachments/assets/799e5555-8b4a-47f4-b689-7a720769778d" />
+
+<img width="964" height="268" alt="image" src="https://github.com/user-attachments/assets/9797d138-5373-4a04-b37f-a1def7c7742a" />
+
+Meskipun method memiliki nama yang sama, informasi tambahan yang ditampilkan menyesuaikan kategori fasilitas.
+
+### 6.2 Method Overloading
+
+Overloading diterapkan melalui penggunaan nama method yang sama dengan parameter berbeda.
+
+Contohnya pada `FasilitasView.java`:
+
+<img width="900" height="300" alt="image" src="https://github.com/user-attachments/assets/22fa2a48-0542-4460-a6ec-0e8e65f5e01c" />
+
+Method pertama menampilkan satu pesan, sedangkan method kedua menampilkan judul beserta pesan.
+
+---
+
+## 🧩 7. Penerapan Abstraction
+
+**Abstraction** digunakan untuk menyediakan struktur dasar tanpa harus menampilkan seluruh detail implementasi.
+
+Program menerapkan abstraction melalui **abstract class** dan **abstract method**.
+
+### 7.1 Abstract Class
+
+Class `Fasilitas` dideklarasikan sebagai abstract class yang menjadi dasar bagi kedua kategori fasilitas.
+
+- <img width="548" height="42" alt="image" src="https://github.com/user-attachments/assets/fb183e77-b765-4f16-80f6-b24196196f14" />
+
+- <img width="620" height="50" alt="image" src="https://github.com/user-attachments/assets/de1f4ad9-7093-42a4-afdc-9d56df108126" />
+
+Method `getKategori()` wajib diimplementasikan oleh subclass sesuai kategorinya.
+
+Contoh pada `FasilitasUmum`:
+
+<img width="464" height="154" alt="image" src="https://github.com/user-attachments/assets/b9d086b3-3a27-4b81-b670-7691cf89a11d" />
+
+### 7.2 Interface
+
+Program juga menerapkan interface `Evalutable` untuk menentukan evaluasi kelayakan fasilitas.
+
+<img width="516" height="332" alt="image" src="https://github.com/user-attachments/assets/9823ecaa-00f2-4edf-bb2f-6035f0a139b9" />
+
+Method `evaluasiKelayakan()` diimplementasikan oleh kedua subclass berdasarkan kondisi fasilitas.
+
+| Kondisi | Evaluasi |
+|---|---|
+| **Baik** | Fasilitas layak digunakan. |
+| **Cukup** | Fasilitas perlu dipantau. |
+| **Rusak** | Fasilitas perlu perbaikan. |
+
+---
+
+## 🔌 8. Penerapan JDBC, PreparedStatement, dan DAO
+
+Pada Mini Project 4, program menggunakan database **MySQL** sebagai media penyimpanan utama.
+
+Integrasi database dilakukan menggunakan JDBC, PreparedStatement, dan DAO Pattern.
+
+### 8.1 JDBC (Java Database Connectivity)
+
+JDBC digunakan untuk menghubungkan aplikasi Java dengan database MySQL.
+
+Konfigurasi koneksi dikelola melalui class `Koneksi.java`.
+
+<img width="1440" height="724" alt="image" src="https://github.com/user-attachments/assets/f647d3a6-dbf2-475e-92bf-c0b8e6175efe" />
+
+Method `getConnection()` digunakan untuk membuka koneksi ketika DAO menjalankan operasi database.
+
+Program menggunakan dependency **MySQL Connector/J 8.3.0** melalui Maven.
+
+<img width="824" height="254" alt="image" src="https://github.com/user-attachments/assets/1b23939d-7f7b-454e-8f52-4912f6f9bc84" />
+
+<img width="1046" height="272" alt="image" src="https://github.com/user-attachments/assets/7f968d31-5dcf-4d99-8e93-6ed7b53718cb" />
+
+### 8.2 PreparedStatement
+
+**PreparedStatement** digunakan untuk menjalankan query SQL dengan parameter `?`.
+
+Contoh penerapan pada operasi INSERT:
+
+<img width="1526" height="724" alt="image" src="https://github.com/user-attachments/assets/47ac39ae-f74f-4616-8261-b75b4cc0f2f2" />
+
+Parameter `?` digunakan sebagai tempat nilai input yang kemudian diisi menggunakan `setString()` atau `setInt()`.
+
+Penggunaan PreparedStatement membantu memisahkan data input dari struktur query SQL dan mengurangi risiko SQL Injection.
+
+### 8.3 DAO (Data Access Object)
+
+**DAO Pattern** digunakan untuk memisahkan proses pengaksesan database dari logika utama program.
+
+Seluruh operasi database dikelola melalui class `FasilitasDAO.java`.
+
+| Method | Operasi SQL | Fungsi |
+|---|---|---|
+| `tampilSemua()` | SELECT | Menampilkan seluruh fasilitas. |
+| `cariBerdasarkanId()` | SELECT | Mencari fasilitas berdasarkan ID. |
+| `tambah()` | INSERT | Menambahkan fasilitas baru. |
+| `update()` | UPDATE | Memperbarui data fasilitas. |
+| `hapus()` | DELETE | Menghapus fasilitas. |
+
+Dengan penerapan DAO, Controller tidak perlu menuliskan query SQL secara langsung. Controller cukup memanggil method DAO sesuai kebutuhan.
+
+- <img width="992" height="106" alt="image" src="https://github.com/user-attachments/assets/2bd834ea-c781-44ff-8e16-a4b280831f45" />
+
+- <img width="920" height="78" alt="image" src="https://github.com/user-attachments/assets/deee26ad-ed69-4709-8bed-c8f7a8e6e819" />
+
+- <img width="1522" height="146" alt="image" src="https://github.com/user-attachments/assets/0038f247-63ee-43c1-a54c-dc6ed7acc068" />
+
+- <img width="1574" height="72" alt="image" src="https://github.com/user-attachments/assets/d1454f51-60cb-40b5-b416-e45bf49ac22b" />
+
+- <img width="888" height="76" alt="image" src="https://github.com/user-attachments/assets/421d7fb3-7dbf-4cff-9ec7-d2fa13efd0c5" />
+
+---
+
+## 🗄️ 9. Database MySQL
+
+Program menggunakan database bernama **`fasilitas_taman_kota`** dengan tabel `fasilitas`.
+
+<img width="452" height="136" alt="image" src="https://github.com/user-attachments/assets/97f285e4-d4d8-42b8-a2fa-b4cf622013ec" />
+
+### 9.1 Struktur Tabel
+
+<img width="1928" height="624" alt="image" src="https://github.com/user-attachments/assets/33344533-2f9e-47df-96c6-e84fdf1cb0d4" />
+
+### 9.2 Dummy Data Awal
+
+Program menyediakan dummy data langsung melalui database SQL agar data fasilitas sudah tersedia ketika fitur Read pertama kali dijalankan.
+
+<img width="1320" height="190" alt="image" src="https://github.com/user-attachments/assets/f5e54c92-398e-4bed-bf34-c9e7c1cc1d42" />
+
+Dummy data dimasukkan melalui file **`fasilitas_taman_kota.sql`**, bukan melalui kode Java.
+
+Database juga menggunakan `AUTO_INCREMENT` untuk menghasilkan ID fasilitas secara otomatis saat pengguna menambahkan data baru.
+
+## ▶️ 10. Cara Menjalankan Program
+
+1. Buka project menggunakan **Apache NetBeans**.
+   
+   <img width="158" height="208" alt="image" src="https://github.com/user-attachments/assets/6dba1c0b-6e62-4f9a-bfee-eca0549c26e9" />
+
+2. Pastikan JDK dan Maven sudah dikonfigurasi.
+  
+   
+3. Jalankan layanan **MySQL** melalui Laragon.
+4. Buka phpMyAdmin dan buat database bernama `fasilitas_taman_kota`.
+6. Impor file `fasilitas_taman_kota.sql`.
+7. Pastikan konfigurasi database pada `Koneksi.java` sudah sesuai.
+8. Jalankan class `main.Main`.
+9. Pilih menu untuk melakukan operasi CRUD.
+
+---
+
+## 📝 11. Kesimpulan
+
+Mini Project 4 berhasil mengembangkan Sistem Manajemen Fasilitas Taman Kota menjadi aplikasi Java yang terintegrasi dengan database MySQL.
+
+Penerapan **MVC, encapsulation, inheritance, polymorphism, abstraction, JDBC, PreparedStatement, dan DAO** membantu memisahkan tanggung jawab setiap bagian program serta mendukung pengelolaan data fasilitas melalui operasi CRUD secara permanen.
