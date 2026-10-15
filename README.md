@@ -74,3 +74,58 @@ Fitur Create digunakan untuk menambahkan fasilitas baru berdasarkan nama, katego
 Sebelum disimpan, data divalidasi melalui constructor Model. Setelah validasi berhasil, Controller memanggil method `tambah()` pada DAO.
 
 - <img width="1286" height="44" alt="image" src="https://github.com/user-attachments/assets/2419598c-8a93-4788-8614-d4541db20ecb" />
+
+### 3.2 Read — Menampilkan Fasilitas
+
+Fitur Read digunakan untuk menampilkan seluruh fasilitas yang tersimpan di database.
+
+<img width="1128" height="400" alt="image" src="https://github.com/user-attachments/assets/5e46abdc-360c-406f-95e6-e1086d47bda9" />
+
+Data diambil melalui DAO, kemudian ditampilkan berdasarkan jenis objek fasilitas.
+
+### 3.3 Update — Memperbarui Fasilitas
+
+Fitur Update digunakan untuk memperbarui data fasilitas berdasarkan ID.
+
+Program mencari fasilitas terlebih dahulu, kemudian memvalidasi perubahan menggunakan setter Model sebelum menjalankan query UPDATE.
+
+<img width="1786" height="184" alt="image" src="https://github.com/user-attachments/assets/891e23ed-6f7b-43d6-9736-8c8c7705a5a8" />
+
+### 3.4 Delete — Menghapus Fasilitas
+
+Fitur Delete digunakan untuk menghapus fasilitas berdasarkan ID.
+
+Program terlebih dahulu memeriksa apakah fasilitas tersedia di database.
+
+<img width="992" height="332" alt="image" src="https://github.com/user-attachments/assets/87f9e857-e413-4716-90c2-0d8143bce1c8" />
+
+## 🔐 4. Penerapan Encapsulation
+
+**Encapsulation** adalah konsep OOP yang digunakan untuk melindungi atribut agar tidak dapat diakses atau diubah secara langsung dari luar class.
+
+Pada program ini, encapsulation diterapkan dalam abstract class `Fasilitas` melalui atribut `private` dan method getter dan setter.
+
+### Contoh Atribut Private
+
+<img width="550" height="194" alt="image" src="https://github.com/user-attachments/assets/a01f7ec7-26c9-4897-9b2b-0db290a1cace" />
+
+### Contoh Setter dengan Validasi
+
+<img width="1194" height="216" alt="image" src="https://github.com/user-attachments/assets/eae61997-2c38-4413-b627-18e28df67ab7" />
+
+Method `setJumlah()` memastikan jumlah fasilitas tidak bernilai negatif. Validasi juga diterapkan pada ID, nama, kondisi, dan atribut khusus fasilitas.
+
+Pada proses Create dan Update, Controller menggunakan validasi Model sebelum data dikirim ke database.
+
+## 🧬 5. Penerapan Inheritance
+
+**Inheritance** adalah konsep pewarisan atribut dan method dari superclass kepada subclass.
+
+Program menggunakan abstract class `Fasilitas` sebagai superclass, dengan dua subclass:
+
+- `FasilitasUmum`
+- `FasilitasOlahraga`
+
+<img width="408" height="182" alt="image" src="https://github.com/user-attachments/assets/d3097a8c-714a-452b-963d-9c697a6d5cd7" />
+
+### Contoh Implementasi
