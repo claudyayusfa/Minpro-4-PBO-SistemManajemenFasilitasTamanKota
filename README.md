@@ -353,6 +353,8 @@ Program meminta ID fasilitas yang ingin diperbarui, kemudian pengguna dapat meng
 
 <img width="546" height="482" alt="image" src="https://github.com/user-attachments/assets/4bf30e55-efd8-45db-b239-e18773c503bc" />
 
+<img width="1384" height="264" alt="image" src="https://github.com/user-attachments/assets/5d7a42eb-e572-452a-b4be-9bf9345a90ba" />
+
 ### 10.6 Keluar dari Program
 
 Pengguna memilih **menu 5** untuk mengakhiri program.
