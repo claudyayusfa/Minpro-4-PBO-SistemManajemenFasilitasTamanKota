@@ -1,5 +1,11 @@
 # 🌳 Sistem Manajemen Fasilitas Taman Kota 𖦹˙🍎.°🌱٭.
 
+|Identitas|Keterangan|
+|---|---|
+|Nama: | Claudya Yusfa Ariyani |
+|NIM: | 2509116043 |
+|Kelas: | B2025 |
+
 **Mini Project 4 Praktikum Pemrograman Berorientasi Objek**
 
 Sistem Manajemen Fasilitas Taman Kota adalah sistem berbasis **Java Command Line Interface (CLI)** yang digunakan untuk mengelola data fasilitas taman kota. Program ini dikembangkan menggunakan konsep **Object-Oriented Programming (OOP)**, arsitektur **Model-View-Controller (MVC)**, dan integrasi database **MySQL** melalui **JDBC, PreparedStatement, dan DAO Pattern**.
