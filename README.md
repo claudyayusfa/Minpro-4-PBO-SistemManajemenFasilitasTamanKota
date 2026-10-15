@@ -67,7 +67,7 @@ Alur kerja program:
 5. **MySQL** menyimpan, memperbarui, menghapus, atau menyediakan data.
 6. Hasil proses ditampilkan kembali kepada pengguna melalui View.
 
-### 3.1 Create — Menambahkan Fasilitas
+### 3.1 Menambahkan Fasilitas
 
 Fitur Create digunakan untuk menambahkan fasilitas baru berdasarkan nama, kategori, kondisi, jumlah, dan jenis fasilitas.
 
@@ -75,7 +75,7 @@ Sebelum disimpan, data divalidasi melalui constructor Model. Setelah validasi be
 
 - <img width="1286" height="44" alt="image" src="https://github.com/user-attachments/assets/2419598c-8a93-4788-8614-d4541db20ecb" />
 
-### 3.2 Read — Menampilkan Fasilitas
+### 3.2 Menampilkan Fasilitas
 
 Fitur Read digunakan untuk menampilkan seluruh fasilitas yang tersimpan di database.
 
@@ -83,7 +83,7 @@ Fitur Read digunakan untuk menampilkan seluruh fasilitas yang tersimpan di datab
 
 Data diambil melalui DAO, kemudian ditampilkan berdasarkan jenis objek fasilitas.
 
-### 3.3 Update — Memperbarui Fasilitas
+### 3.3 Memperbarui Fasilitas
 
 Fitur Update digunakan untuk memperbarui data fasilitas berdasarkan ID.
 
@@ -91,7 +91,7 @@ Program mencari fasilitas terlebih dahulu, kemudian memvalidasi perubahan menggu
 
 <img width="1786" height="184" alt="image" src="https://github.com/user-attachments/assets/891e23ed-6f7b-43d6-9736-8c8c7705a5a8" />
 
-### 3.4 Delete — Menghapus Fasilitas
+### 3.4 Menghapus Fasilitas
 
 Fitur Delete digunakan untuk menghapus fasilitas berdasarkan ID.
 
@@ -129,3 +129,22 @@ Program menggunakan abstract class `Fasilitas` sebagai superclass, dengan dua su
 <img width="408" height="182" alt="image" src="https://github.com/user-attachments/assets/d3097a8c-714a-452b-963d-9c697a6d5cd7" />
 
 ### Contoh Implementasi
+
+- <img width="1096" height="38" alt="image" src="https://github.com/user-attachments/assets/461ce871-0b99-4b68-91e0-163a0c19e184" />
+
+- <img width="1156" height="32" alt="image" src="https://github.com/user-attachments/assets/5d5ef18c-97d5-4564-bb3f-5c3680561e7d" />
+
+Kedua subclass mewarisi atribut umum, yaitu ID, nama, kondisi, jumlah, dan menggunakan `super()` untuk memanggil constructor superclass.
+
+Setiap subclass memiliki atribut khusus:
+
+- `FasilitasUmum` memiliki atribut `jenis`.
+- `FasilitasOlahraga` memiliki atribut `jenisOlahraga`.
+
+Dengan inheritance, atribut dan method yang sama tidak perlu ditulis ulang pada setiap subclass.
+
+## 🔀 6. Penerapan Polymorphism
+
+**Polymorphism** adalah konsep OOP yang dapat membuat method dengan nama yang sama memiliki perilaku berbeda.
+
+Program menerapkan **method overriding** dan **method overloading**.
