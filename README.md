@@ -305,7 +305,7 @@ Database juga menggunakan `AUTO_INCREMENT` untuk menghasilkan ID fasilitas secar
 
 ---
 
-## ▶️ 10. Alur Program
+## ▶️ 10. Alur Menjalankan Program
 
 Program **Sistem Manajemen Fasilitas Taman Kota** dijalankan melalui class `Main.java` pada Apache NetBeans. Setelah program dijalankan, pengguna dapat mengakses fitur pengelolaan fasilitas melalui terminal.
 
