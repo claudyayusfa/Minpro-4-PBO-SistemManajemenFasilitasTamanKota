@@ -303,21 +303,63 @@ Dummy data dimasukkan melalui file **`fasilitas_taman_kota.sql`**, bukan melalui
 
 Database juga menggunakan `AUTO_INCREMENT` untuk menghasilkan ID fasilitas secara otomatis saat pengguna menambahkan data baru.
 
-## ▶️ 10. Cara Menjalankan Program
+---
 
-1. Buka project menggunakan **Apache NetBeans**.
-   
-   <img width="158" height="208" alt="image" src="https://github.com/user-attachments/assets/6dba1c0b-6e62-4f9a-bfee-eca0549c26e9" />
+## ▶️ 10. Alur Program
 
-2. Pastikan JDK dan Maven sudah dikonfigurasi.
-  
-   
-3. Jalankan layanan **MySQL** melalui Laragon.
-4. Buka phpMyAdmin dan buat database bernama `fasilitas_taman_kota`.
-6. Impor file `fasilitas_taman_kota.sql`.
-7. Pastikan konfigurasi database pada `Koneksi.java` sudah sesuai.
-8. Jalankan class `main.Main`.
-9. Pilih menu untuk melakukan operasi CRUD.
+Program **Sistem Manajemen Fasilitas Taman Kota** dijalankan melalui class `Main.java` pada Apache NetBeans. Setelah program dijalankan, pengguna dapat mengakses fitur pengelolaan fasilitas melalui terminal.
+
+### 10.1 Menampilkan Menu Utama
+
+Ketika program dijalankan, sistem menampilkan menu utama yang berisi lima pilihan, yaitu menampilkan fasilitas, menambahkan fasilitas, menghapus fasilitas, memperbarui fasilitas, dan keluar dari program.
+
+Pengguna dapat memilih fitur dengan memasukkan nomor menu yang tersedia.
+
+<img width="548" height="342" alt="image" src="https://github.com/user-attachments/assets/99b615b3-6957-46a3-a83f-558059dddeae" />
+
+### 10.2 Menampilkan Data Fasilitas (Read)
+
+Pengguna memilih **menu 1** untuk menampilkan seluruh data fasilitas yang tersimpan dalam database MySQL.
+
+Program mengambil data melalui `FasilitasDAO`, kemudian menampilkan informasi fasilitas berupa ID, nama, kategori, kondisi, jumlah, jenis, serta hasil evaluasi kelayakan.
+
+<img width="546" height="694" alt="image" src="https://github.com/user-attachments/assets/94cbbe90-a41a-4a55-b5d2-cae25241708e" />
+
+### 10.3 Menambahkan Data Fasilitas (Create)
+
+Pengguna memilih **menu 2** untuk menambahkan fasilitas baru.
+
+Program meminta pengguna memasukkan nama fasilitas, kategori fasilitas (Umum atau Olahraga), kondisi, jumlah, dan jenis fasilitas. Data yang dimasukkan akan divalidasi terlebih dahulu sebelum disimpan ke database menggunakan JDBC dan PreparedStatement.
+
+Apabila proses berhasil, program menampilkan pesan bahwa fasilitas berhasil ditambahkan.
+
+<img width="558" height="668" alt="image" src="https://github.com/user-attachments/assets/77b5d61b-d254-428d-b566-cbbfa01f4b05" />
+
+<img width="566" height="574" alt="image" src="https://github.com/user-attachments/assets/d41cf01c-5ec6-45fb-8f1d-a0dee810d9a9" />
+
+### 10.4 Menghapus Data Fasilitas (Delete)
+
+Pengguna memilih **menu 3** untuk menghapus data fasilitas.
+
+Program meminta ID fasilitas yang ingin dihapus, kemudian memeriksa keberadaan data tersebut di database. Apabila ID ditemukan, data fasilitas akan dihapus menggunakan method `hapus()` pada `FasilitasDAO`.
+
+<img width="546" height="224" alt="image" src="https://github.com/user-attachments/assets/e72eea1e-5ebf-4dc3-908d-8b14f86517da" />
+
+### 10.5 Memperbarui Data Fasilitas (Update)
+
+Pengguna memilih **menu 4** untuk memperbarui data fasilitas.
+
+Program meminta ID fasilitas yang ingin diperbarui, kemudian pengguna dapat mengubah nama, kondisi, dan jumlah fasilitas. Setiap perubahan divalidasi melalui setter Model sebelum disimpan kembali ke database.
+
+<img width="546" height="482" alt="image" src="https://github.com/user-attachments/assets/4bf30e55-efd8-45db-b239-e18773c503bc" />
+
+### 10.6 Keluar dari Program
+
+Pengguna memilih **menu 5** untuk mengakhiri program.
+
+Setelah menu tersebut dipilih, proses perulangan menu utama dihentikan dan program selesai dijalankan.
+
+<img width="1024" height="270" alt="image" src="https://github.com/user-attachments/assets/951c59f0-94f7-4389-a7f5-804044a7602b" />
 
 ---
 
