@@ -79,7 +79,9 @@ Fitur Create digunakan untuk menambahkan fasilitas baru berdasarkan nama, katego
 
 Sebelum disimpan, data divalidasi melalui constructor Model. Setelah validasi berhasil, Controller memanggil method `tambah()` pada DAO.
 
-- <img width="1286" height="44" alt="image" src="https://github.com/user-attachments/assets/2419598c-8a93-4788-8614-d4541db20ecb" />
+<img width="1286" height="44" alt="image" src="https://github.com/user-attachments/assets/2419598c-8a93-4788-8614-d4541db20ecb" />
+
+ID fasilitas tidak dimasukkan secara manual karena dihasilkan otomatis oleh MySQL melalui `AUTO_INCREMENT`.
 
 ### 3.2 Menampilkan Fasilitas
 
