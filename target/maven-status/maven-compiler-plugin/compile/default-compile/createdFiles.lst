@@ -1,8 +1,0 @@
-helper\InputHelper.class
-view\FasilitasView.class
-models\Fasilitas.class
-controller\FasilitasController.class
-models\Evalutable.class
-models\FasilitasOlahraga.class
-main\Main.class
-models\FasilitasUmum.class

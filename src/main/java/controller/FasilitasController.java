@@ -6,49 +6,41 @@ import models.Fasilitas;
 import models.FasilitasUmum;
 import models.FasilitasOlahraga;
 import view.FasilitasView;
+import dao.FasilitasDAO;
 
 public class FasilitasController {
     
-    private final ArrayList<Fasilitas> daftarFasilitas;
     private final FasilitasView view;
-    private int idSelanjutnya = 3;
+    private final FasilitasDAO fasilitasDAO;
 
     public FasilitasController(FasilitasView view){
-        
         this.view = view;
-        this.daftarFasilitas = new ArrayList<>();
+        this.fasilitasDAO = new FasilitasDAO();
+    }
         
-        daftarFasilitas.add(
-                new FasilitasUmum(1, "Gazebo", "Baik", 4, "Tempat Istirahat")      
-        );
-        daftarFasilitas.add(
-                new FasilitasOlahraga(2, "Lapangan Basket", "Baik", 1, "Basket")
-        );
-    }
-    
-    private int membuatId() {
-        return idSelanjutnya++;
-    }
-    
     //READ
     public void tampilkanFasilitas() {
         view.tampilkanJudulProses(" DATA FASILITAS TAMAN KOTA");
         
-        if (daftarFasilitas.isEmpty()){
-            view.tampilkanPesan("Belum ada data fasilitas.");
-            return;
-        }
-        
-        for (Fasilitas fasilitas : daftarFasilitas){
-            view.tampilkanDataFasilitas(fasilitas);
+        try {
+            ArrayList<Fasilitas> daftarFasilitas = fasilitasDAO.tampilSemua();
+
+            if (daftarFasilitas.isEmpty()){
+                view.tampilkanPesan("Belum ada data fasilitas.");
+                return;
+            }
+
+            for (Fasilitas fasilitas : daftarFasilitas){
+                view.tampilkanDataFasilitas(fasilitas);
+            }
+        } catch (RuntimeException e){
+            view.tampilkanPesan(e.getMessage());
         }
     }
     
     //CREATE
     public void tambahFasilitas() {
         view.tampilkanJudulProses(" TAMBAH DATA FASILITAS");
-        
-        int id = membuatId();
         
         String nama = view.inputNama();
         
@@ -60,24 +52,37 @@ public class FasilitasController {
             return;
         }
         
+        String kategori = (pilihanJenis == 1)
+                ? "Umum" : "Olahraga";
+        
         String kondisi = view.inputKondisi();
         int jumlah = view.inputJumlah();
-        
-        Fasilitas fasilitas;
+                
+        String jenis;
         
         if (pilihanJenis == 1){
-            String jenis = view.inputJenis();
-            
-            fasilitas = new FasilitasUmum(id, nama, kondisi, jumlah, jenis);
+            jenis = view.inputJenis();
         } else {
-            String jenisOlahraga = view.inputJenisOlahraga();
-            
-            fasilitas = new FasilitasOlahraga(id, nama, kondisi, jumlah, jenisOlahraga);
+            jenis = view.inputJenisOlahraga();
         }
         
-        daftarFasilitas.add(fasilitas);
-        
-        view.tampilkanPesan("Berhasil!", "Fasilitas berhasil ditambahkan!");
+        try {
+            if (pilihanJenis == 1){
+                new FasilitasUmum(1, nama, kondisi, jumlah, jenis);
+            } else {
+                new FasilitasOlahraga(1, nama, kondisi, jumlah, jenis);
+            }
+            
+            boolean berhasil = fasilitasDAO.tambah(nama, kategori, kondisi, jumlah, jenis);
+            
+            if (berhasil){
+                view.tampilkanPesan("Berhasil!", "Fasilitas berhasil ditambahkan!");
+            } else {
+                view.tampilkanPesan("Fasilitas gagal ditambahkan!");
+            }
+        } catch (IllegalArgumentException e){
+            view.tampilkanPesan("Validasi gagal: " + e.getMessage());
+        }
     }
     
     //DELETE
@@ -86,15 +91,24 @@ public class FasilitasController {
         
         int id = view.inputId();
         
-        Fasilitas fasilitasDitemukan = cariFasilitas(id);
-        
-        if (fasilitasDitemukan == null){
-            view.tampilkanPesan("Fasilitas tidak ditemukan!");
-            return;
+        try {
+            Fasilitas fasilitas = fasilitasDAO.cariBerdasarkanId(id);
+            
+            if (fasilitas == null){
+                view.tampilkanPesan("Fasilitas tidak ditemukan!");
+                return;
+            }
+            
+            boolean berhasil = fasilitasDAO.hapus(id);
+            
+            if (berhasil){
+                view.tampilkanPesan("Fasilitas berhasil dihapus!");
+            } else {
+                view.tampilkanPesan("Fasilitas gagal dihapus!");
+            }
+        } catch (RuntimeException e){
+            view.tampilkanPesan(e.getMessage());
         }
-        
-        daftarFasilitas.remove(fasilitasDitemukan);
-        view.tampilkanPesan("Fasilitas berhasil dihapus!");
     }
     
     //UPDATE
@@ -103,31 +117,34 @@ public class FasilitasController {
         
         int id = view.inputId();
         
-        Fasilitas fasilitasDitemukan = cariFasilitas(id);
-        
-        if (fasilitasDitemukan == null){
-            view.tampilkanPesan("Fasilitas dengan ID tersebut tidak ditemukan!");
-            return;
-        }
-        
-        String nama = view.inputNama();
-        String kondisi = view.inputKondisi();
-        int jumlah = view.inputJumlah();
-        
-        fasilitasDitemukan.setNama(nama);
-        fasilitasDitemukan.setKondisi(kondisi);
-        fasilitasDitemukan.setJumlah(jumlah);
-        
-        view.tampilkanPesan("\nFasilitas berhasil diperbarui!");
-    }
-
-    private Fasilitas cariFasilitas(int id){
-        for (Fasilitas fasilitas : daftarFasilitas){
-            if (fasilitas.getId() == id){
-                return fasilitas;
+        try {
+            Fasilitas fasilitas = fasilitasDAO.cariBerdasarkanId(id);
+            
+            if (fasilitas == null){
+                view.tampilkanPesan("Fasilitas dengan ID tersebut tidak ditemukan!");
+                return;
             }
+            
+            String nama = view.inputNama();
+            String kondisi = view.inputKondisi();
+            int jumlah = view.inputJumlah();
+            
+            fasilitas.setNama(nama);
+            fasilitas.setKondisi(kondisi);
+            fasilitas.setJumlah(jumlah);
+            
+            boolean berhasil = fasilitasDAO.update(id, fasilitas.getNama(), fasilitas.getKondisi(), fasilitas.getJumlah());
+            
+            if (berhasil) {
+                view.tampilkanPesan("Fasilitas berhasil diperbarui!");
+            } else {
+                view.tampilkanPesan("Fasilitas gagal diperbarui!");
+            }
+            
+        } catch (IllegalArgumentException e){
+            view.tampilkanPesan("Validasi gagal: " + e.getMessage());
+        } catch (RuntimeException e){
+            view.tampilkanPesan(e.getMessage());
         }
-        return null;
     }
-    
 }
